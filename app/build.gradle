@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+		targetSdkVersion 25
+
+        applicationId "com.odysseos.homeplayer"
+        versionCode 1
+        versionName "1.0"
+    }
+
+    productFlavors {
+        mobile {
+            minSdkVersion 15
+
+            applicationIdSuffix ".mobile"
+            versionNameSuffix "-mobile"
+
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
+
+        tv {
+			minSdkVersion 21
+
+            applicationIdSuffix ".tv"
+            versionNameSuffix "-tv"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.google.android.exoplayer:exoplayer:r2.1.1'
+
+    mobileCompile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    mobileCompile 'com.android.support:design:25.1.0'
+
+    tvCompile 'com.android.support:leanback-v17:25.1.0'
+    tvCompile 'com.github.bumptech.glide:glide:3.7.0'
+
+    testCompile 'junit:junit:4.12'
+    androidTestMobileCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}
